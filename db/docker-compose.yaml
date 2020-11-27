@@ -5,7 +5,7 @@ services:
   source_db:
     container_name: source
     # We use the predefined Postgres image
-    image: mdillon/postgis
+    image: postgres:12
     environment:
       # Set user/password for Postgres
       POSTGRES_USER: postgres
@@ -24,7 +24,7 @@ services:
   target_db:
     container_name: target
     # We use the predefined Postgres image
-    image: mdillon/postgis
+    image: postgres:12
     environment:
       # Set user/password for Postgres
       POSTGRES_USER: postgres
