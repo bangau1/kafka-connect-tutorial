@@ -1,0 +1,16 @@
+{
+  "name": "sink_target",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "topics": "prefix_users",
+    "connection.url": "jdbc:postgresql://target:5433/postgres",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "dialect.name": "PostgreSqlDatabaseDialect",
+    "insert.mode": "upsert",
+    "pk.mode": "record_value",
+    "pk.fields": "id",
+    "auto.create": "true",
+    "auto.evolve": "true"
+  }
+}
