@@ -11,6 +11,7 @@ INSERT INTO public.users(id, name, address)
 VALUES (1, 'Agung Pratama', 'Cibinong, Bogor')
 ON CONFLICT (id) DO NOTHING;
 
+select pg_sleep(5);
 INSERT INTO public.users(id, name, address)
 VALUES (2, 'Annisa', 'Cibinong, Bogor')
 ON CONFLICT (id) DO NOTHING;
