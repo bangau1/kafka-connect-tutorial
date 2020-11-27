@@ -8,6 +8,8 @@ services:
       - "2181:2181"
     networks:
     - db_net
+    volumes:
+    - zookeeper:/var/lib/zookeeper/data
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -23,6 +25,8 @@ services:
     ports:
       - "9092:9092"
       - "29092:29092"
+    volumes:
+    - kafka:/var/lib/kafka/data
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -33,6 +37,9 @@ services:
     image: confluentinc/cp-enterprise-control-center:5.5.1
     hostname: control-center
     container_name: control-center
+    command:
+      - control-center-start
+      - /etc/confluent-control-center/control-center.properties
     depends_on:
       - zookeeper
       - kafka
@@ -40,6 +47,9 @@ services:
       - "9021:9021"
     networks:
     - db_net
+    volumes:
+    - control:/var/lib/confluent-control-center
+    - ./configs:/etc/confluent-control-center
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:9092'
       CONTROL_CENTER_ZOOKEEPER_CONNECT: 'zookeeper:2181'
@@ -61,6 +71,7 @@ services:
     - db_net
     volumes:
       - ./plugins:/usr/local/share/kafka/plugins
+      - kafka-connect:/var/lib/kafka/data
     environment:
       CONNECT_BOOTSTRAP_SERVERS: kafka:9092
       CONNECT_REST_ADVERTISED_HOST_NAME: connect
@@ -83,3 +94,9 @@ services:
 networks:
   db_net:
     external: true
+# Define the volumes
+volumes:
+  kafka:
+  kafka-connect:
+  control:
+  zookeeper:
