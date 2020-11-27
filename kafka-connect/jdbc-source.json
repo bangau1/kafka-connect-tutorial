@@ -1,0 +1,12 @@
+{
+  "name": "source_postgresql",
+  "config": {
+      "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+      "connection.url": "jdbc:postgresql://source:5432/postgres",
+      "connection.user": "postgres",
+      "connection.password": "postgres",
+      "topic.prefix": "postgres",
+      "poll.interval.ms" : 3600000,
+      "mode":"bulk"
+  }
+}
