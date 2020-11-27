@@ -1,0 +1,48 @@
+version: '3'
+
+# Containers we are going to run
+services:
+  source_db:
+    container_name: source
+    # We use the predefined Postgres image
+    image: mdillon/postgis
+    environment:
+      # Set user/password for Postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      # Set a path where Postgres should store the data
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      # Mapping the port to make the Phoenix app accessible outside of the container
+      - "5432:5432"
+    networks:
+    - net
+
+  target_db:
+    container_name: target
+    # We use the predefined Postgres image
+    image: mdillon/postgis
+    environment:
+      # Set user/password for Postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGPORT: "5433"
+      # Set a path where Postgres should store the data
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      # Mapping the port to make the Phoenix app accessible outside of the container
+      - "5433:5433"
+    networks:
+    - net
+# Define the volumes
+volumes:
+  pgdata:
+networks:
+  net:
+    driver: bridge
