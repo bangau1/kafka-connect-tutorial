@@ -5,8 +5,12 @@
       "connection.url": "jdbc:postgresql://source:5432/postgres",
       "connection.user": "postgres",
       "connection.password": "postgres",
-      "topic.prefix": "postgres",
-      "poll.interval.ms" : 3600000,
-      "mode":"bulk"
+      "topic.prefix": "prefix_incrementing_",
+      "poll.interval.ms" : 1000,
+      "table.whitelist": "users",
+      "schema.pattern": "public",
+      "mode":"incrementing",
+      "incrementing.column.name": "timestamp",
+      "db.timezone": "UTC"
   }
 }
