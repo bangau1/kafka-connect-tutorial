@@ -1,0 +1,14 @@
+{
+  "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+  "connection.url": "jdbc:postgresql://source:5432/postgres",
+  "connection.user": "postgres",
+  "connection.password": "postgres",
+  "table.whitelist": "users",
+  "schema.pattern": "public",
+  "mode": "timestamp+incrementing",
+  "incrementing.column.name": "id",
+  "timestamp.column.name": "last_modified",
+  "validate.non.null": "false",
+  "poll.interval.ms": "5000",
+  "topic.prefix": "prefix_"
+}

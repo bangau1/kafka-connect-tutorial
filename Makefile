@@ -17,6 +17,11 @@ setup-source-jdbc:
 	curl -d @"kafka-connect/jdbc-source.json" \
 		-H "Content-Type: application/json" \
 		-X POST http://localhost:8083/connectors
+update-source-jdbc:
+	curl -d @"kafka-connect/jdbc-source-update.json" \
+		-H "Content-Type: application/json" \
+		-X PUT http://localhost:8083/connectors/source_postgresql/config
+
 
 delete-source-jdbc:
 	curl -X DELETE http://localhost:8083/connectors/source_postgresql
