@@ -36,3 +36,12 @@ setup-sink-jdbc:
 
 delete-source-jdbc:
 	curl -X DELETE http://localhost:8083/connectors/source_postgresql
+
+
+TOPIC=prefix_users
+kafka-topic-peek:
+	docker run --net db_net --rm edenhill/kafkacat:1.6.0 \
+		-C -o -10 -q \
+		-b kafka:9092 \
+		-t $(TOPIC)
+
