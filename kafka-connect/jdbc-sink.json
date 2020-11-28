@@ -2,6 +2,8 @@
   "name": "sink_target",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "errors.log.enable": "true",
+    "errors.log.include.messages": "true",
     "topics": "prefix_users",
     "connection.url": "jdbc:postgresql://target:5433/postgres",
     "connection.user": "postgres",
